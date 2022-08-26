@@ -20,17 +20,28 @@ function App() {
   ]);
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  // useState for when contact link is selected
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/* conditionally render pages */}
+        {!contactSelected ? (
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
